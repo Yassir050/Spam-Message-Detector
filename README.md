@@ -1,8 +1,31 @@
-📩 Spam Message Detector
+<p align="center">
+  <img src="assets/spam-detector-banner.png" alt="Spam Message Detector Banner" width="100%">
+</p>
+<h1 align="center">📩 Spam Message Detector</h1>
+<p align="center">
+  <strong>SMS spam classification using NLP and Machine Learning.</strong>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/Scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white">
+  <img src="https://img.shields.io/badge/NLP-TF--IDF-6A5ACD?style=for-the-badge">
+  <img src="https://img.shields.io/badge/GitHub-Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white">
+</p>
+<p align="center">
+  <a href="https://github.com/Yassir050/Spam-Message-Detector">💻 Repository</a>
+</p>
 
-A machine learning project that classifies SMS messages as Spam or Ham (legitimate) using Natural Language Processing (NLP) and supervised machine learning.
+⸻
+
+📖 Overview
+
+Spam Message Detector is a machine learning project that classifies SMS messages as Spam or Ham (legitimate) using Natural Language Processing (NLP) and supervised machine learning.
 
 The project uses the SMS Spam Collection dataset from the UCI Machine Learning Repository.
+
+The goal is to build a clean and reproducible machine learning pipeline covering data preprocessing, text vectorization, model training, evaluation, and model persistence.
+
+⸻
 
 ✨ Features
 
@@ -14,14 +37,24 @@ The project uses the SMS Spam Collection dataset from the UCI Machine Learning R
 * 💾 Model persistence with Joblib
 * 🧹 Data cleaning and duplicate removal
 * 🛡️ Train/test data splitting
+* ⚙️ Automated training with GitHub Actions
+
+⸻
 
 🛠️ Technologies
 
-* Python 3
-* Pandas
-* Scikit-learn
-* Joblib
-* Git & GitHub
+Technology	Purpose
+Python 3	Programming language
+Pandas	Data loading and preprocessing
+Scikit-learn	Machine learning and evaluation
+TF-IDF	Text feature extraction
+Logistic Regression	SMS classification
+Joblib	Model persistence
+Git	Version control
+GitHub	Source code hosting
+GitHub Actions	Automated workflow
+
+⸻
 
 📊 Dataset
 
@@ -36,11 +69,14 @@ Dataset source:
 
 UCI Machine Learning Repository — SMS Spam Collection
 
-https://archive.ics.uci.edu/dataset/228/sms%2Bspam%2Bcollection
+⸻
 
 📁 Project Structure
 
 Spam-Message-Detector/
+├── assets/
+│   └── spam-detector-banner.png
+│
 ├── data/
 │   └── SMSSpamCollection
 │
@@ -49,6 +85,10 @@ Spam-Message-Detector/
 │   └── train.py
 │
 ├── models/
+│
+├── .github/
+│   └── workflows/
+│       └── train.yml
 │
 ├── README.md
 ├── requirements.txt
@@ -61,21 +101,30 @@ Files
 * train.py — Trains and evaluates the machine learning model.
 * models/ — Stores the trained model locally.
 * requirements.txt — Project dependencies.
-* .gitignore — Prevents unnecessary files and generated model files from being committed.
+* .github/workflows/ — GitHub Actions automation.
+* .gitignore — Prevents unnecessary and generated files from being committed.
+
+⸻
 
 ⚙️ How It Works
 
-The classification pipeline is:
+The machine learning pipeline is:
 
 SMS Message
      ↓
+Data Loading
+     ↓
 Data Cleaning
+     ↓
+Train/Test Split
      ↓
 TF-IDF Vectorization
      ↓
 Logistic Regression
      ↓
-Spam / Ham
+Model Evaluation
+     ↓
+Saved Model
 
 1. Data Loading
 
@@ -86,17 +135,29 @@ The dataset is loaded using Pandas and separated into:
 
 2. Data Cleaning
 
-Empty rows and duplicate messages are removed before training.
+The preprocessing stage:
 
-3. Text Vectorization
+* Removes missing values
+* Removes duplicate messages
+* Prepares the data for machine learning
 
-TF-IDF (Term Frequency–Inverse Document Frequency) converts text into numerical features that can be processed by the machine learning model.
+3. Train/Test Split
 
-4. Model Training
+The dataset is divided into training and testing sets.
 
-A Logistic Regression classifier is trained on the vectorized SMS messages.
+A stratified split is used to maintain the class distribution between the two sets.
 
-5. Evaluation
+4. TF-IDF Vectorization
+
+TF-IDF (Term Frequency–Inverse Document Frequency) converts SMS text into numerical features that can be processed by a machine learning model.
+
+The vectorizer is fitted only on the training data and then used to transform the test data.
+
+5. Model Training
+
+A Logistic Regression classifier is trained using the TF-IDF features.
+
+6. Evaluation
 
 The model is evaluated using:
 
@@ -105,19 +166,29 @@ The model is evaluated using:
 * Recall
 * F1-score
 
+7. Model Persistence
+
+The trained model and TF-IDF vectorizer are saved using Joblib.
+
+models/spam_model.pkl
+
+⸻
+
 🚀 Installation
 
-Clone the repository:
+1. Clone the repository
 
 git clone https://github.com/Yassir050/Spam-Message-Detector.git
 
-Enter the project directory:
+2. Enter the project directory
 
 cd Spam-Message-Detector
 
-Install the dependencies:
+3. Install dependencies
 
 pip install -r requirements.txt
+
+⸻
 
 ▶️ Train the Model
 
@@ -139,6 +210,8 @@ The trained model will be saved as:
 
 models/spam_model.pkl
 
+⸻
+
 📈 Example Output
 
 Training completed!
@@ -149,9 +222,24 @@ ham             ...
 spam            ...
 Model saved to: models/spam_model.pkl
 
-The exact results may vary depending on the dataset and model configuration.
+The exact evaluation results may vary depending on the dataset and model configuration.
 
-📚 Skills Practiced
+⸻
+
+⚙️ GitHub Actions
+
+The repository includes a GitHub Actions workflow that automatically:
+
+1. Checks out the repository.
+2. Sets up Python.
+3. Installs project dependencies.
+4. Runs the training pipeline.
+
+This helps make the project more reproducible and demonstrates basic CI/CD workflow experience.
+
+⸻
+
+🧠 Skills Practiced
 
 This project demonstrates practical experience with:
 
@@ -166,14 +254,20 @@ This project demonstrates practical experience with:
 * Model evaluation
 * Model persistence
 * Git & GitHub
+* GitHub Actions
+* Reproducible ML workflows
+
+⸻
 
 🎯 Project Goal
 
-The goal of this project is to build practical experience in Machine Learning and NLP while developing a clean and organized GitHub project.
+The goal of this project is to build practical experience in Machine Learning and NLP while developing a clean and organized machine learning repository.
 
 This project is part of my learning path toward AI Engineering.
 
-👤 Author
+⸻
+
+👨‍💻 Author
 
 Yassir.B
 
